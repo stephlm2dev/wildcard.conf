@@ -8,7 +8,6 @@ filetype plugin indent on
 set nocompatible
 scriptencoding=utf-8
 set encoding=utf-8
-set shellcmdflag=-ic
 set autoindent
 set smartindent
 set tabstop=2
@@ -21,10 +20,12 @@ set lazyredraw
 set ffs=unix,dos,mac
 set laststatus=2
 set noshowmode
-set shell=/bin/bash
+set shell=/bin/zsh
 set tw=79
 set formatoptions+=t
 set backspace=indent,eol,start
+set ttyfast
+set spelllang=fr,en " Spell languages
 filetype off
 
 " Store .swp in those directory and not in the directory of the edited file
