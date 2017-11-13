@@ -21,6 +21,7 @@ set ffs=unix,dos,mac
 set laststatus=2
 set noshowmode
 set shell=/bin/zsh
+" set shellcmdflag=-ic
 set tw=79
 set formatoptions+=t
 set backspace=indent,eol,start
@@ -44,6 +45,10 @@ match OverLength /\%81v.\+/
 
 " Format the code (indentation)
 map <F4> mzgg=G`z<CR>`
+
+" FIXME nmap <F5> :set list! :highlight NonText guifg=#cccccc :highlight SpecialKey guifg=#cccccc
+" jolis caractères pour les caracs invisibles :
+" set listchars=tab:▸_,eol:$,space:.,nbsp:°
 
 " Auto-completion
 set omnifunc=syntaxcomplete#Complete
@@ -181,6 +186,7 @@ let g:syntastic_cpp_compiler_options = ' --std=c++11'
 let g:syntastic_ocaml_use_ocamlc = 1
 let g:syntastic_ocaml_checkers = ['merlin']
 let g:syntastic_typescript_checkers = ['tslint']
+" let g:syntastic_javascript_checkers = ['flow']
 
 " Vim-Airline - Status/Tabline bar
 " http://vimawesome.com/plugin/vim-airline-sad-beautiful-tragic

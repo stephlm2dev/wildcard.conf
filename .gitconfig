@@ -1,0 +1,29 @@
+[filter "lfs"]
+	required = true
+	process = git-lfs filter-process
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[user]
+	name = <FILL_ME>
+	email = <FILL_ME>
+	signingkey = <FILL_ME>
+[github]
+	user = stephlm2dev
+[credential]
+	helper = osxkeychain
+[alias]
+	st = status
+	df = diff
+	hist = log --pretty=format:"%C(yellow)%h%Creset\\ %C(green)%ar%C(cyan)%d\\ %Creset%s%C(yellow)\\ [%cn]" --graph --decorate --all
+[color]
+	ui = auto
+[push]
+	default = simple
+[core]
+  editor = vim
+  autocrlf = input
+  whitespace = trailing-space
+[apply]
+  whitespace = fix
+[commit]
+  gpgsign = true

@@ -58,7 +58,7 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  sudo svn git git-extras colored-man web-search wd npm gem extract common-aliases drush
+  sudo svn git git-extras colored-man web-search wd npm gem extract common-aliases drush k
   scala pip python postgres gulp brew thefuck vagrant docker composer wp-cli aws heroku
   zsh-autosuggestions zsh-syntax-highlighting
 )
@@ -66,12 +66,17 @@ plugins=(
 # stephlm2dev: Others usefull plugins but not activated
 
 # User configuration
+export ANDROID_HOME='/usr/local/opt/android-sdk'
 
 export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
-export PATH="/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH"
-export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
+export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
+# export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
+export PATH="$(brew --prefix homebrew/php/php71)/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
-export PATH="/usr/local/opt/android-sdk/platform-tools:$PATH"
+export PATH=${PATH}:${ANDROID_HOME}/tools/bin
+export PATH=${PATH}:${ANDROID_HOME}/platform-tools
+export PATH="$HOME/.fastlane/bin:$PATH"
+export PATH="$HOME/.composer/vendor/bin:$PATH"
 # export RBENV_ROOT=/usr/local/var/rbenv
 
 export JAVA_HOME=$(/usr/libexec/java_home)
@@ -132,7 +137,49 @@ export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/h
 export LESSOPEN="| src-hilite-lesspipe.sh %s"
 export LESS=" -R "
 
-export ANDROID_HOME='/usr/local/opt/android-sdk'
+# For notwaldorf/tiny-care-terminal
+# https://github.com/notwaldorf/tiny-care-terminal
+
+# List of accounts to read the last tweet from, comma separated
+# The first in the list is read by the party parrot.
+export TTC_BOTS='tinycarebot,selfcare_bot,magicrealismbot'
+
+# Use this to have a different animal say a message in the big box.
+export TTC_SAY_BOX="yeoman"
+
+export TTC_GITBOT="gitlog"
+
+# List of folders to look into for `git` commits, comma separated.
+export TTC_REPOS='<FILL_ME>'
+
+# The max directory-depth to look for git repositories in
+# the directories defined with `TTC_REPOS`. Note that the deeper
+# the directory depth, the slower the results will be fetched.
+export TTC_REPOS_DEPTH=3
+
+# Location/zip code to check the weather for. Both 90210 and "San Francisco, CA"
+# _should_ be ok (the zip code doesn't always work -- use a location
+# first, if you can). It's using weather.service.msn.com behind the curtains.
+export TTC_WEATHER='Paris'
+
+# Set to false if you're an imperial savage. <3
+export TTC_CELSIUS=true
+
+# Unset this if you _don't_ want to use Twitter keys and want to
+# use web scraping instead.
+export TTC_APIKEYS=true
+
+# Refresh the dashboard every 20 minutes.
+export TTC_UPDATE_INTERVAL=20
+
+# Note: in tiny-terminal-care < 1.0.7, the recommended variables for the Twitter
+# API keys were the ones before. As of 1.0.8, they are deprecated
+# (because the names are too generic), but will still be supported
+# until the next major version.
+export CONSUMER_KEY='<FILL_ME>'
+export CONSUMER_SECRET='<FILL_ME>'
+export ACCESS_TOKEN='<FILL_ME>'
+export ACCESS_TOKEN_SECRET='<FILL_ME>'
 
 ################################################################################
 #                           START OWN ALIAS                                    #
@@ -151,9 +198,6 @@ alias php.ini='$EDITOR /usr/local/etc/php/5.6/php.ini'
 # Directory
 alias tmp='cd /private/tmp/'
 
-# Applications
-alias dynamoDB='java -Djava.library.path=$HOME/Applications/DynamoDB/DynamoDBLocal_lib -jar /Applications/DynamoDB/DynamoDBLocal.jar -sharedDb -port 8183'
-
 # Software
 alias vims='vim -p'
 alias viml='vim -S' # load vim session
@@ -164,10 +208,10 @@ alias serverHTTP='python -m SimpleHTTPServer'
 alias cppCompile='c++ -std=c++11 -stdlib=libc++'
 alias format='fmt'
 alias spotlight='spot'
-alias dockerStart='bash --login "/Applications/Docker/Docker Quickstart Terminal.app/Contents/Resources/Scripts/start.sh"'
 alias weather='curl wttr.in'
 alias less='less -m -g -i -J --underline-special --SILENT'
 alias tscp='tsc -p tsconfig.json'
+alias simulator='open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app'
 
 # Git alias
 alias master='git checkout master'
@@ -179,3 +223,11 @@ alias untracked='svn st | grep ?'
 ################################################################################
 #                             END OWN ALIAS                                    #
 ################################################################################
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
+function gitignore() { curl -L -s https://www.gitignore.io/api/$@ ;}
