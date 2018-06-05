@@ -15,3 +15,7 @@ Configuration file based on https://github.com/tony/tmux-config
 
 Configuration from scratch  
 Plugins from http://vimawesome.com
+
+## WTF
+
+https://wtfutil.com/posts/overview/
