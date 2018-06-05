@@ -1,0 +1,6 @@
+[defaults]
+url=https://sentry.io/
+org=<FILL_ME>
+
+[auth]
+token=<FILL_ME>
