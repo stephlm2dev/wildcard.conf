@@ -1,0 +1,116 @@
+wtf:
+  colors:
+    border:
+      focusable: darkslateblue
+      focused: orange
+      normal: gray
+  grid:
+    columns: [40, 40, 40, 40]
+    rows: [13, 13, 13, 13]
+  refreshInterval: 1
+  mods:
+    system:
+      enabled: true
+      position:
+        top: 0
+        left: 0
+        height: 1
+        width: 1
+      refreshInterval: 3600
+    clocks:
+      colors:
+        rows:
+          even: "lightblue"
+          odd: "white"
+      enabled: true
+      locations:
+        Paris: "Europe/Paris"
+        Martinique: "America/Martinique"
+        Reunion: "Indian/Reunion"
+        Canada: "Canada/Mountain"
+        Australie: "Australia/Sydney"
+        Brésil: "America/Sao_Paulo"
+      position:
+        top: 0
+        left: 1
+        height: 1
+        width: 1
+      refreshInterval: 15
+      sort: "chronological"
+    prettyweather:
+      enabled: true
+      city: "Paris"
+      position:
+        top: 0
+        left: 2
+        height: 1
+        width: 2
+      refreshInterval: 300
+      unit: "c"
+    status:
+      enabled: true
+      position:
+        top: 0
+        left: 4
+        height: 2
+        width: 1
+      refreshInterval: 1
+    security:
+      enabled: true
+      position:
+        top: 1
+        left: 0
+        height: 1
+        width: 1
+      refreshInterval: 3600
+    ipinfo:
+      enabled: true
+      colors:
+        name: red
+        value: white
+      position:
+        top: 1
+        left: 1
+        height: 1
+        width: 1
+      refreshInterval: 15
+    power:
+      enabled: true
+      position:
+        top: 1
+        left: 2
+        height: 1
+        width: 1
+      refreshInterval: 15
+    textfile:
+      enabled: true
+      filePath: "~/.wtf/config.yml"
+      position:
+        top: 1
+        left: 3
+        height: 1
+        width: 1
+      refreshInterval: 30
+    git:
+      commitCount: 10
+      enabled: true
+      position:
+        top: 2
+        left: 0
+        height: 2
+        width: 3
+      refreshInterval: 8
+      repositories:
+        - ""
+    github:
+      enabled: true
+      position:
+        top: 2
+        left: 3
+        height: 2
+        width: 2
+      refreshInterval: 300
+      repositories:
+
+      username: "stephlm2dev"
+
