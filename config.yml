@@ -8,6 +8,7 @@ wtf:
     columns: [40, 40, 40, 40]
     rows: [13, 13, 13, 13]
   refreshInterval: 1
+  term: "xterm-256color"
   mods:
     system:
       enabled: true
@@ -48,7 +49,7 @@ wtf:
       refreshInterval: 300
       unit: "c"
     status:
-      enabled: true
+      enabled: false
       position:
         top: 0
         left: 4
@@ -84,7 +85,7 @@ wtf:
       refreshInterval: 15
     textfile:
       enabled: true
-      filePath: "~/.wtf/config.yml"
+      filePath: "~/.config/wtf/config.yml"
       position:
         top: 1
         left: 3
@@ -104,13 +105,15 @@ wtf:
         - ""
     github:
       enabled: true
+      apiKey: <apiKey>
       position:
         top: 2
         left: 3
         height: 2
         width: 2
       refreshInterval: 300
+      enableStatus: true
       repositories:
-
+        <repo>: "<account>"
       username: "stephlm2dev"
 
