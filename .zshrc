@@ -58,12 +58,15 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  sudo svn git git-extras colored-man web-search wd npm gem extract common-aliases drush k
-  scala pip python postgres gulp brew thefuck vagrant docker composer wp-cli aws heroku
+  sudo svn git git-extras colored-man web-search wd npm gem extract common-aliases taskwarrior k
+  scala pip python postgres gulp brew docker composer wp-cli aws heroku zsh-nvm
   zsh-autosuggestions zsh-syntax-highlighting
 )
 
 # stephlm2dev: Others usefull plugins but not activated
+# drush vagrant
+
+export NVM_LAZY_LOAD=true
 
 # User configuration
 export ANDROID_HOME='/usr/local/opt/android-sdk'
@@ -71,19 +74,26 @@ export ANDROID_HOME='/usr/local/opt/android-sdk'
 export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
 export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 # export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
-export PATH="$(brew --prefix homebrew/php/php71)/bin:$PATH"
+export PATH="$(brew --prefix php@7.1)/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH=${PATH}:${ANDROID_HOME}/tools/bin
 export PATH=${PATH}:${ANDROID_HOME}/platform-tools
 export PATH="$HOME/.fastlane/bin:$PATH"
 export PATH="$HOME/.composer/vendor/bin:$PATH"
-# export RBENV_ROOT=/usr/local/var/rbenv
+export PATH="/usr/local/MacGPG2/bin:$PATH"
+# export PATH="$(brew --prefix python2)/libexec/bin:$PATH"
+export PATH="/usr/bin/python2.7:$PATH"
+export GOPATH=$HOME/Documents/Github/go
+export GOROOT=/usr/local/opt/go/libexec
+export PATH="$GOPATH/bin:$PATH"
+export PATH="$GOROOT/bin:$PATH"
 
+# export RBENV_ROOT=/usr/local/var/rbenv
+# eval $(docker-machine env default)
 export JAVA_HOME=$(/usr/libexec/java_home)
 
 # export PATH=$PATH:/usr/local/mysql/bin
-eval `opam config env`
-eval "$(thefuck --alias)"
+# eval `opam config env`
 
 # eval "$(rbenv init -)"
 eval "$(rbenv init - --no-rehash zsh)"
@@ -92,7 +102,7 @@ eval "$(rbenv init - --no-rehash zsh)"
 export TERM=xterm-256color
 
 # Slack Token for cstar Industries
-# export SLACK_TOKEN=<TOKEN_ID>
+export SLACK_TOKEN=<TOKEN_ID>
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -127,6 +137,7 @@ export LANG=fr_FR.UTF-8
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 [[ -s $(brew --prefix)/etc/profile.d/autojump.sh  ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
+[[ -r $NVM_DIR/bash_completion ]] && \. $NVM_DIR/bash_completion
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 
@@ -198,6 +209,10 @@ alias php.ini='$EDITOR /usr/local/etc/php/5.6/php.ini'
 # Directory
 alias tmp='cd /private/tmp/'
 
+# Applications
+alias dynamoDB='java -Djava.library.path=$HOME/Applications/DynamoDB/DynamoDBLocal_lib -jar /Applications/DynamoDB/DynamoDBLocal.jar -sharedDb -port 8183'
+alias git='LC_ALL=en_GB git'
+
 # Software
 alias vims='vim -p'
 alias viml='vim -S' # load vim session
@@ -208,6 +223,7 @@ alias serverHTTP='python -m SimpleHTTPServer'
 alias cppCompile='c++ -std=c++11 -stdlib=libc++'
 alias format='fmt'
 alias spotlight='spot'
+alias dockerStart='bash --login "/Applications/Docker/Docker Quickstart Terminal.app/Contents/Resources/Scripts/start.sh"'
 alias weather='curl wttr.in'
 alias less='less -m -g -i -J --underline-special --SILENT'
 alias tscp='tsc -p tsconfig.json'
@@ -231,3 +247,6 @@ alias untracked='svn st | grep ?'
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
 function gitignore() { curl -L -s https://www.gitignore.io/api/$@ ;}
+
+# heroku autocomplete setup
+HEROKU_AC_ZSH_SETUP_PATH="$HOME/Library/Caches/heroku/autocomplete/zsh_setup" && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
