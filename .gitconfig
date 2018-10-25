@@ -4,9 +4,9 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 [user]
-	name = <FILL_ME>
-	email = <FILL_ME>
-	signingkey = <FILL_ME>
+  name = <FILL_ME>
+  email = <FILL_ME>
+  signingkey = <FILL_ME>
 [github]
 	user = stephlm2dev
 [credential]
@@ -16,14 +16,27 @@
 	df = diff
 	hist = log --pretty=format:"%C(yellow)%h%Creset\\ %C(green)%ar%C(cyan)%d\\ %Creset%s%C(yellow)\\ [%cn]" --graph --decorate --all
 [color]
-	ui = auto
+	ui = true
 [push]
 	default = simple
 [core]
   editor = vim
   autocrlf = input
   whitespace = trailing-space
+	pager = diff-so-fancy | less --tabs=4 -RFX
 [apply]
   whitespace = fix
 [commit]
   gpgsign = true
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = yellow
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
