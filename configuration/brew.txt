@@ -76,7 +76,6 @@ watchman
 wget
 xcproj
 yarn
-yasm
 zsh
 zsh-completions
 zsh-syntax-highlighting
