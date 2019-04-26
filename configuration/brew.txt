@@ -80,3 +80,4 @@ yarn
 zsh
 zsh-completions
 zsh-syntax-highlighting
+qlmarkdown
