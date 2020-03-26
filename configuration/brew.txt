@@ -19,6 +19,7 @@ fzf
 zegervdv/zathura/girara
 git
 git-flow
+inetutils
 git-hooks
 git-lfs
 gnupg
@@ -63,6 +64,7 @@ getsentry/tools/sentry-cli
 sip
 rockymadden/rockymadden/slack-cli
 source-highlight
+shellcheck
 subversion
 taskd
 tasksh
