@@ -36,6 +36,8 @@ set undodir=~/.vim/undo_files//
 
 " Set terminal to 256colors
 if !has('gui_running')
+  set term=screen-256color
+  set background=dark
   set t_Co=256
 endif
 

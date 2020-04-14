@@ -85,6 +85,7 @@ export PATH="/usr/local/MacGPG2/bin:$PATH"
 export PATH="/usr/bin/python2.7:$PATH"
 export GOPATH=$HOME/Documents/Github/go
 export GOROOT=/usr/local/opt/go/libexec
+export PATH="/Library/TeX/texbin:$PATH"
 export PATH="$GOPATH/bin:$PATH"
 export PATH="$GOROOT/bin:$PATH"
 
@@ -102,8 +103,7 @@ eval "$(rbenv init - --no-rehash zsh)"
 export TERM=xterm-256color
 
 # Slack Token for cstar Industries
-export SLACK_TOKEN=<TOKEN_ID>
-
+# export SLACK_TOKEN=<TOKEN_ID>
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -210,12 +210,20 @@ alias php.ini='$EDITOR /usr/local/etc/php/5.6/php.ini'
 alias tmp='cd /private/tmp/'
 
 # Applications
-alias dynamoDB='java -Djava.library.path=$HOME/Applications/DynamoDB/DynamoDBLocal_lib -jar /Applications/DynamoDB/DynamoDBLocal.jar -sharedDb -port 8183'
 alias git='LC_ALL=en_GB git'
+alias issues='hub browse -- issues'
+alias my-issues='hub issue -a $USER'
+alias pull-request='hub browse -- pulls'
+alias psqlConnect='PGPASSWORD=$DATABASE_PASSWORD psql -U $DATABASE_USER -h $DATABASE_HOST $DATABASE_NAME'
+alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 
 # Software
+alias tmuxdev='tmux new -s dev'
+alias mytmux='tmux new -s mine'
 alias vims='vim -p'
 alias viml='vim -S' # load vim session
+alias diff='vim -d'
+alias cat='bat'
 alias youtube='mpsyt'
 alias fileManager='ranger'
 alias calendar='cal'
