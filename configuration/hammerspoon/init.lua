@@ -8,6 +8,7 @@ myHotkeys = {"ctrl", "alt", "cmd"}
 icons = {
   default = "/Applications/Hammerspoon.app/Contents/Resources/AppIcon.icns",
   alert = "/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/Actions.icns",
+  mac = "/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/com.apple.macbookpro-15-retina-touchid-silver.icns",
   network = "/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/AirDrop.icns",
   photo = "/Applications/Polarr Photo Editor.app/Contents/Resources/AppIcon-Lite.icns",
   skype = "/Applications/Skype.app/Contents/Resources/Skype.icns",
@@ -45,13 +46,14 @@ Installer:andUse('MiroWindowsManager', {
 })
 
 -- Utilities function
-function notify(title, message, icon)
+function notify(title, message, icon, stayActive)
   icon = icon or ''
+  duration = stayActive and 0 or 5
   hs.notify.new({
     title=title,
     informativeText=message,
     setIdImage=icon,
-    withdrawAfter=5
+    withdrawAfter=duration
   }):send()
 end
 
@@ -65,6 +67,12 @@ function connectToNetwork(SSID_NETWORK)
 
   hs.wifi.setPower(true)
   hs.wifi.associate(SSID_NETWORK, SSID_PASSWORD)
+end
+
+function formatTime(timeInSeconds)
+  local minutes = math.floor(timeInSeconds / 60)
+  local seconds = timeInSeconds - (minutes * 60)
+  return string.format("%02d:%02d", minutes, seconds)
 end
 
 -- Reload Hammerspoon config
@@ -135,7 +143,7 @@ end
 hs.hotkey.bind(myHotkeys, "P", triggerPhotographyMode)
 
 -- Shut down my Mac !
-function shutdownMac()
+function triggerShutdownSystem()
   notify(
     "System",
     "Shutdown in progress !",
@@ -152,7 +160,86 @@ function shutdownMac()
   hs.caffeinate.shutdownSystem()
 end
 
-hs.hotkey.bind(myHotkeys, "Q", shutdownMac)
+hs.hotkey.bind(myHotkeys, "Q", triggerShutdownSystem)
+
+-- Pomodoro timer
+-- https://www.hammerspoon.org/docs/hs.timer.html#new
+-- https://github.com/dbmrq/dotfiles/blob/master/home/.hammerspoon/cherry.lua
+local isActive = false
+local pomodoroDuration = 1 -- 45 min
+local timeLeft = pomodoroDuration * 60
+local timer = hs.timer.new(1, function() pomodoroTimer() end)
+
+function pomodoroTimer()
+  if not isActive then return end
+  timeLeft = timeLeft - 1
+  if (isActive and timeLeft % 60 == 0) then
+    refreshMenu()
+  end
+  if timeLeft <= 0 then
+    resetTimer()
+    notify(
+      "Podomoro timer",
+      "Done! 🍒",
+      icons.mac,
+      true
+    )
+  end
+end
+
+function toggleTimer()
+  if (isActive) then pauseTimer() else startTimer() end
+end
+
+function remainingTimer()
+  local state = isActive and "" or " (paused)"
+  hs.alert("Pomodoro timer" .. state .. " - " .. formatTime(timeLeft))
+end
+
+function pomodoroMenuItem()
+  local title = ""
+  if isActive then
+    title = "Running (" .. formatTime(timeLeft) .. ") !"
+  elseif (pomodoroDuration * 60 == timeLeft) then
+    title = "Stopped !"
+  else
+    title = "Paused (" .. formatTime(timeLeft) .. ") !"
+  end
+  return "🍒 " .. title
+end
+
+function startTimer()
+	if isActive then return end
+	timer:start()
+	isActive = true
+  refreshMenu()
+  notify(
+    "Podomoro timer",
+    "Running (duration: " .. formatTime(timeLeft) .. ") !",
+    icons.mac
+  )
+end
+
+function pauseTimer()
+	if not isActive then return end
+	timer:stop()
+	isActive = false
+  refreshMenu()
+  notify(
+    "Podomoro timer",
+    "Paused (remaining time: " .. formatTime(timeLeft) .. ") !",
+    icons.mac
+  )
+end
+
+function resetTimer()
+  timer:stop()
+	timeLeft = pomodoroDuration * 60
+  refreshMenu()
+end
+
+hs.hotkey.bind(myHotkeys, "T", toggleTimer)
+hs.hotkey.bind(myHotkeys, "Y", remainingTimer)
 
 -- https://www.hammerspoon.org/docs/hs.application.watcher.html
 function applicationListener(appName, eventType, appObject)
@@ -220,25 +307,37 @@ wifiWatcher:start()
 
 -- By default, mute the sound !
 audio = hs.audiodevice.defaultOutputDevice()
--- audio:setVolume(0)
+audio:setVolume(0)
 
--- My meny bar !
-menuBar = hs.menubar.new()
+-- My menu bar !
+function menuBarItems()
+  return  {
+    { title = "Reload Hammerspoon conf", fn = reloadHammerspoonConfiguration },
+    { title = "Shutdown system", fn = triggerShutdownSystem },
+    { title = "-" },
+    {
+      title = "Mode",
+      menu = {
+        { title = "Development", fn = triggerDevelopmentMode },
+        { title = "Photography", fn = triggerPhotographyMode }
+      }
+    },
+    { title = pomodoroMenuItem(), disabled = true }
+  }
+end
+
+local menuBar = hs.menubar.new()
 menuBar
   :setIcon("./menu.png")
   :setTooltip("Hammerspoon - Menu")
-  :setMenu(
-    {
-      { title = "Reload Hammerspoon conf", fn = reloadHammerspoonConfiguration },
-      { title = "-" },
-      {
-        title = "Mode",
-        menu = {
-          { title = "Development", fn = triggerDevelopmentMode },
-          { title = "Photography", fn = triggerPhotographyMode }
-        }
-      }
-    }
-  )
+  :setMenu(menuBarItems())
+
+function refreshMenu()
+  menuBar:setMenu(menuBarItems())
+end
 
 -- TODO input action in Alacritty (try AppleScript)
+-- https://github.com/picsoung/breezBot/blob/master/hook.lua#L26
+-- change status when arrive on Slack
+-- add leave work status (quit all apps)
+-- https://api.slack.com/docs/presence-and-status
