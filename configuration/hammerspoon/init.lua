@@ -166,7 +166,7 @@ hs.hotkey.bind(myHotkeys, "Q", triggerShutdownSystem)
 -- https://www.hammerspoon.org/docs/hs.timer.html#new
 -- https://github.com/dbmrq/dotfiles/blob/master/home/.hammerspoon/cherry.lua
 local isActive = false
-local pomodoroDuration = 1 -- 45 min
+local pomodoroDuration = 45 -- 45 min
 local timeLeft = pomodoroDuration * 60
 local timer = hs.timer.new(1, function() pomodoroTimer() end)
 
@@ -235,11 +235,19 @@ end
 function resetTimer()
   timer:stop()
 	timeLeft = pomodoroDuration * 60
+  isActive = false
   refreshMenu()
 end
 
 hs.hotkey.bind(myHotkeys, "T", toggleTimer)
-hs.hotkey.bind(myHotkeys, "Y", remainingTimer)
+hs.hotkey.bind(myHotkeys, "B", remainingTimer)
+hs.hotkey.bind(myHotkeys, "-", resetTimer)
+
+
+function openDocumentation()
+  os.execute("open -a 'Safari Technology Preview.app' https://developer.mozilla.org/fr/")
+end
+hs.hotkey.bind(myHotkeys, "D", openDocumentation)
 
 -- https://www.hammerspoon.org/docs/hs.application.watcher.html
 function applicationListener(appName, eventType, appObject)
