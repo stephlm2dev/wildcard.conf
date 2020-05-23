@@ -243,11 +243,15 @@ hs.hotkey.bind(myHotkeys, "T", toggleTimer)
 hs.hotkey.bind(myHotkeys, "B", remainingTimer)
 hs.hotkey.bind(myHotkeys, "-", resetTimer)
 
-
 function openDocumentation()
   os.execute("open -a 'Safari Technology Preview.app' https://developer.mozilla.org/fr/")
 end
 hs.hotkey.bind(myHotkeys, "D", openDocumentation)
+
+function pasteEmail()
+  hs.eventtap.keyStrokes("<YOUR_EMAIL>")
+end
+hs.hotkey.bind(myHotkeys, "S", pasteEmail)
 
 -- https://www.hammerspoon.org/docs/hs.application.watcher.html
 function applicationListener(appName, eventType, appObject)
