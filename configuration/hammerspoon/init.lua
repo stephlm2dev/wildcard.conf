@@ -90,11 +90,14 @@ hs.hotkey.bind(myHotkeys, "R", reloadHammerspoonConfiguration)
 
 -- TODO Development
 function triggerDevelopmentMode()
+  -- 0. Start "Basecamp 3"
+  basecamp = hs.application.open("Basecamp 3")
+
   -- 1. Start "Slack"
-  slack = hs.application.open("Slack", 10, true)
+  slack = hs.application.open("Slack")
 
   -- 2. Start "Trello"
-  trello = hs.application.open("Trello", 10, true)
+  trello = hs.application.open("Trello")
 
   -- 3. Start "Mail"
   mail = hs.application.open("Mail")
@@ -108,13 +111,7 @@ function triggerDevelopmentMode()
   -- 6. Focus on "Alacritty"
   alactritty:activate()
 
-  -- FIXME 6.1 Start `tmuxdev`
-  -- hs.eventtap.keyStrokes("tmuxdev")
-
-  -- FIXME 6.2 Trigger tmux ressurect
-  -- hs.eventtap.keyStroke({"ctrl"}, "B R")
-
-  -- 7. Set brightness to 100% (ie max)
+  -- 7. Set brightness to 50%
   hs.brightness.set(50)
 
   notify("Development", "Go dev !")
@@ -255,7 +252,7 @@ hs.hotkey.bind(myHotkeys, "S", pasteEmail)
 
 -- https://www.hammerspoon.org/docs/hs.application.watcher.html
 function applicationListener(appName, eventType, appObject)
-  if (appName == "Skype" or appName == 'zoom.us') then
+  if (appName == "Skype" or appName == 'zoom.us' or appName == 'Slack') then
     local icon = (appName == "Skype") and icons.skype or icons.zoom
     muteMyVoiceOnMeeting(eventType, icon)
   end
