@@ -54,6 +54,7 @@ rbenv-gemset
 reattach-to-user-namespace
 redis
 rename
+restic
 rethinkdb
 ripgrep
 rlwrap

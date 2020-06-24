@@ -1,5 +1,92 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
 
+schemes:
+  default_theme: &default
+    # Colors (Tomorrow Night Bright)
+    primary:
+      background: '0x282c34'
+      foreground: '0xabb2bf'
+
+    # Normal colors
+    normal:
+      black:   '0x333333'
+      red:     '0xcc0000'
+      green:   '0x4e9a06'
+      yellow:  '0xc4a000'
+      blue:    '0x3465a4'
+      magenta: '0x75507b'
+      cyan:    '0x06989a'
+      white:   '0xd3d7cf'
+
+    # Bright colors
+    bright:
+      black:   '0x88807c'
+      red:     '0xf15d22'
+      green:   '0x73c48f'
+      yellow:  '0xffce51'
+      blue:    '0x48b9c7'
+      magenta: '0xad7fa8'
+      cyan:    '0x34e2e2'
+      white:   '0xeeeeec'
+
+  light_theme: &light
+    # Colors (Gruvbox light)
+    primary:
+      # hard contrast: background = '#f9f5d7'
+      background: '#fbf1c7'
+      # soft contrast: background = '#f2e5bc'
+      foreground: '#3c3836'
+
+    # Normal colors
+    normal:
+      black:   '#fbf1c7'
+      red:     '#cc241d'
+      green:   '#98971a'
+      yellow:  '#d79921'
+      blue:    '#458588'
+      magenta: '#b16286'
+      cyan:    '#689d6a'
+      white:   '#7c6f64'
+
+    # Bright colors
+    bright:
+      black:   '#928374'
+      red:     '#9d0006'
+      green:   '#79740e'
+      yellow:  '#b57614'
+      blue:    '#076678'
+      magenta: '#8f3f71'
+      cyan:    '#427b58'
+      white:   '#3c3836'
+
+  dark_theme: &dark
+    # iTerm2 colors
+    primary:
+      background: '#000000'
+      foreground: '#c7c7c7'
+
+    # Normal colors
+    normal:
+      black:   '#000000'
+      red:     '#c91b00'
+      green:   '#00c200'
+      yellow:  '#c7c400'
+      blue:    '#0225c7'
+      magenta: '#c930c7'
+      cyan:    '#00c5c7'
+      white:   '#c7c7c7'
+
+    # Bright colors
+    bright:
+      black:   '#676767'
+      red:     '#ff6d67'
+      green:   '#5ff967'
+      yellow:  '#fefb67'
+      blue:    '#6871ff'
+      magenta: '#ff76ff'
+      cyan:    '#5ffdff'
+      white:   '#feffff'
+
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
@@ -177,15 +264,7 @@ font:
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
 
-# Colors (Tomorrow Night Bright)
-colors:
-  # Default colors
-  primary:
-    # background: '0x282c34'
-    # foreground: '0xabb2bf'
-    background: '#000000'
-    foreground: '#c7c7c7'
-
+colors: *dark
 
     # Bright and dim foreground colors
     #
@@ -212,46 +291,6 @@ colors:
   #  text: '0xeaeaea'
   #  background: '0x404040'
 
-  # Normal colors
-  normal:
-    # black:   '0x333333'
-    # red:     '0xcc0000'
-    # green:   '0x4e9a06'
-    # yellow:  '0xc4a000'
-    # blue:    '0x3465a4'
-    # magenta: '0x75507b'
-    # cyan:    '0x06989a'
-    # white:   '0xd3d7cf'
-
-    black:   '#000000'
-    red:     '#c91b00'
-    green:   '#00c200'
-    yellow:  '#c7c400'
-    blue:    '#0225c7'
-    magenta: '#c930c7'
-    cyan:    '#00c5c7'
-    white:   '#c7c7c7'
-
-  # Bright colors
-  bright:
-    black:   '#676767'
-    red:     '#ff6d67'
-    green:   '#5ff967'
-    yellow:  '#fefb67'
-    blue:    '#6871ff'
-    magenta: '#ff76ff'
-    cyan:    '#5ffdff'
-    white:   '#feffff'
-
-    # black:   '0x88807c'
-    # red:     '0xf15d22'
-    # green:   '0x73c48f'
-    # yellow:  '0xffce51'
-    # blue:    '0x48b9c7'
-    # magenta: '0xad7fa8'
-    # cyan:    '0x34e2e2'
-    # white:   '0xeeeeec'
-
   # Dim colors
   #
   # If the dim colors are not set, they will be calculated automatically based
@@ -274,7 +313,7 @@ colors:
   # Example:
   #   `- { index: 16, color: '0xff00ff' }`
   #
-  indexed_colors: []
+  # indexed_colors: []
 
 # Visual Bell
 #
