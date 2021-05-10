@@ -113,26 +113,6 @@ Plugin 'terryma/vim-multiple-cursors'
 " http://vimawesome.com/plugin/the-nerd-commenter
 Plugin 'scrooloose/nerdcommenter'
 
-" Fugitive - Git Wrapper
-" http://vimawesome.com/plugin/fugitive-vim
-Plugin 'tpope/vim-fugitive'
-
-" CoffeeScript - Syntax + compile
-" http://vimawesome.com/plugin/vim-coffee-script
-Plugin 'kchmck/vim-coffee-script'
-
-" Less - Syntax
-" http://vimawesome.com/plugin/vim-less-safe-and-sound
-Plugin 'groenewege/vim-less'
-
-" Vim-Scala - Syntax
-" http://vimawesome.com/plugin/vim-scala
-Plugin 'derekwyatt/vim-scala'
-
-" Vim-orgmode - TODO files
-" http://vimawesome.com/plugin/vim-orgmode
-Plugin 'jceb/vim-orgmode'
-
 " Speeddating - Dates
 " http://vimawesome.com/plugin/speeddating-vim
 Plugin 'tpope/vim-speeddating'
@@ -144,6 +124,28 @@ Plugin 'utl.vim'
 " Typescript syntax files for Vim
 " https://github.com/leafgarland/typescript-vim
 Plugin 'leafgarland/typescript-vim'
+
+" EditorConfig plugin for Vim
+" https://github.com/editorconfig/editorconfig-vim
+Plugin 'editorconfig/editorconfig-vim'
+
+" CtrlP
+" https://vimawesome.com/plugin/ctrlp-vim-red
+" Plugin 'kien/ctrlp.vim'
+" https://vimawesome.com/plugin/ctrlp-vim-everything-has-changed
+Plugin 'ctrlpvim/ctrlp.vim'
+
+" Ack
+" https://vimawesome.com/plugin/ack-vim
+Plugin 'mileszs/ack.vim'
+
+" Black (python formatter)
+" https://github.com/psf/black
+Plugin 'psf/black'
+
+" Vim-prettier
+" https://vimawesome.com/plugin/vim-prettier-who-speaks
+Plugin 'prettier/vim-prettier'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -178,15 +180,17 @@ let g:ycm_show_diagnostics_ui = 0 " avoid bug with YouCompleteMe
 
 " Set checkers and compilers options
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_php_checkers = ['php']
+let g:syntastic_php_checkers=['php', 'phpcs']
+let g:syntastic_php_php_args='-l'
+let g:syntastic_php_phpcs_args='--standard=PSR2 -n'
 let g:syntastic_xml_checkers = ['xmllint']
 let g:syntastic_cpp_check_header = 1
 let g:syntastic_cpp_checkers = ['gcc']
 let g:syntastic_cpp_auto_refresh_includes = 1
 let g:syntastic_cpp_compiler = 'g++'
 let g:syntastic_cpp_compiler_options = ' --std=c++11'
-let g:syntastic_ocaml_use_ocamlc = 1
-let g:syntastic_ocaml_checkers = ['merlin']
+" let g:syntastic_ocaml_use_ocamlc = 1
+" let g:syntastic_ocaml_checkers = ['merlin']
 let g:syntastic_typescript_checkers = ['tslint']
 " let g:syntastic_javascript_checkers = ['flow']
 
@@ -197,15 +201,15 @@ let g:airline#extensions#tabline#enabled = 1
 "let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_powerline_fonts = 1
 
+let g:prettier#config#print_width = '140'
+let g:prettier#config#use_tabs = 'false'
+
 " Just show the filename (no path) in the tab
 let g:airline#extensions#tabline#fnamemod = ':t'
 
 " Map <F2> to previous tab and <F3> to next tabs
 nmap <F2> :tabprevious<Enter>
 nmap <F3> :tabnext<Enter>
-
-" YouCompleteMe - Code completion engine
-" http://vimawesome.com/plugin/youcompleteme
 
 augroup VimCSS3Syntax
   autocmd!
